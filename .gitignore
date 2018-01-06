@@ -215,6 +215,7 @@ pythontex-files-*/
 
 # xindy
 *.xdy
+*.xdv
 
 # xypic precompiled matrices
 *.xyc

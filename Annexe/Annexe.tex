@@ -1,0 +1,386 @@
+\documentclass[10pt,landscape]{article}
+    \usepackage{multicol}
+    %\usepackage{calc}
+    \usepackage{ifthen}
+    \usepackage[landscape]{geometry}
+    %\usepackage{hyperref}
+    \usepackage{matlab-prettifier}
+    %\usepackage[T1]{fontenc}
+    \usepackage{xcolor,beramono,amsmath}
+    \usepackage{tikz}
+    % To make this come out properly in landscape mode, do one of the following
+    % 1.
+    %  pdflatex latexsheet.tex
+    %
+    % 2.
+    %  latex latexsheet.tex
+    %  dvips -P pdf  -t landscape latexsheet.dvi
+    %  ps2pdf latexsheet.ps
+    
+    
+    % If you're reading this, be prepared for confusion.  Making this was
+    % a learning experience for me, and it shows.  Much of the placement
+    % was hacked in; if you make it better, let me know...
+    
+    
+    % 2008-04
+    % Changed page margin code to use the geometry package. Also added code for
+    % conditional page margins, depending on paper size. Thanks to Uwe Ziegenhagen
+    % for the suggestions.
+    
+    % 2006-08
+    % Made changes based on suggestions from Gene Cooperman. <gene at ccs.neu.edu>
+    
+    
+    % To Do:
+    % \listoffigures \listoftables
+    % \setcounter{secnumdepth}{0}
+    
+    
+    % This sets page margins to .5 inch if using letter paper, and to 1cm
+    % if using A4 paper. (This probably isn't strictly necessary.)
+    % If using another size paper, use default 1cm margins.
+    \ifthenelse{\lengthtest { \paperwidth = 11in}}
+        { \geometry{top=.5in,left=.5in,right=.5in,bottom=.5in} }
+        {\ifthenelse{ \lengthtest{ \paperwidth = 297mm}}
+            {\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+            {\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+        }
+    
+    % Turn off header and footer
+    \pagestyle{empty}
+    
+    
+    % Redefine section commands to use less space
+    \makeatletter
+    \renewcommand{\section}{\@startsection{section}{1}{0mm}%
+                                    {-1ex plus -.5ex minus -.2ex}%
+                                    {0.5ex plus .2ex}%x
+                                    {\normalfont\large\bfseries}}
+    \renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}%
+                                    {-1explus -.5ex minus -.2ex}%
+                                    {0.5ex plus .2ex}%
+                                    {\normalfont\normalsize\bfseries}}
+    \renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{0mm}%
+                                    {-1ex plus -.5ex minus -.2ex}%
+                                    {1ex plus .2ex}%
+                                    {\normalfont\small\bfseries}}
+    \makeatother
+    
+    % Define BibTeX command
+    \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+        T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+    
+    % Don't print section numbers
+    \setcounter{secnumdepth}{0}
+    
+    
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{0pt plus 0.5ex}
+    
+    
+    
+    %CURLY BRACES ABOVE
+    %https://tex.stackexchange.com/questions/107903/overbrace-in-lstlisting-of-scala-code/107936#107936
+    \makeatletter
+    \newenvironment{btHighlight}[1][]
+    {\begingroup\def\bt@Highlight@par{#1}\begin{lrbox}{\@tempboxa}}
+    {\end{lrbox}\bt@HL@box[\bt@Highlight@par]{\@tempboxa}\endgroup}
+    
+    \newcommand\btHL[1][]{%
+    \begin{btHighlight}[#1]\bgroup\aftergroup\bt@HL@endenv%
+    }
+    \def\bt@HL@endenv{%
+    \end{btHighlight}%   
+    \egroup
+    }
+    \newcommand{\bt@HL@box}[2][]{%
+      $\overset{\text{#1}}{\overbrace{\strut\usebox{#2}}}$%
+    }
+    \makeatother
+    
+    %CURLY BRACES NEXT TO CODE
+    \usetikzlibrary{decorations.pathreplacing,calc}
+    \newcommand{\tikzmark}[1]{\tikz[overlay,remember picture] \node (#1) {};}
+    
+    \newcommand*{\AddNote}[4]{%
+        \begin{tikzpicture}[overlay, remember picture]
+            \draw [decoration={brace,amplitude=0.5em},decorate,ultra thick]
+                ($(#3)!([yshift=1.5ex]#1)!($(#3)-(0,1)$)$) --  
+                ($(#3)!(#2)!($(#3)-(0,1)$)$)
+                    node [align=center, text width=2.5cm, pos=0.5, anchor=west] {#4};
+        \end{tikzpicture}
+    }%
+    
+    
+    %MATLAB inline mini macro
+    \lstMakeShortInline¬
+    \lstset{style=Matlab-bw,basicstyle=\mlttfamily, 
+    moredelim=**[is][{\btHL[facultatif]}]{@}{@},
+    escapechar={§},
+    aboveskip=-0.5ex,
+    belowskip=-1ex}
+    
+    
+    % -----------------------------------------------------------------------
+    
+    \begin{document}
+    
+    \raggedright
+    \footnotesize
+    \begin{multicols*}{3}
+    
+    
+    % multicol parameters
+    % These lengths are set only within the two main columns
+    %\setlength{\columnseprule}{0.25pt}
+    \setlength{\premulticols}{1pt}
+    \setlength{\postmulticols}{1pt}
+    \setlength{\multicolsep}{1pt}
+    \setlength{\columnsep}{2pt}
+    
+    \begin{center}
+            \Large{\textbf{INF135 Aide-mémoire}} \\
+    \end{center}
+    
+    \section{Types de données}
+    \begin{tabular}{@{}ll@{}}
+        double & Valeur numérique\\
+        char & Valeur textuelle \\
+        logical & Valeur Booléenne\\
+        struct & Enregistrement
+    \end{tabular}
+    
+    \section{Déclaration de variables et constantes}
+    \begin{tabular}{@{}ll@{}}
+        Constante & NB\_TERMES = 45;\\
+        Variable & x = 5; \\
+    \end{tabular}
+    
+    \section{Entrée et sortie dans la fenêtre de commande}
+    \subsection{Entrée}
+    ¬x = input('Entrez un nombre : ');¬
+    ¬str = input('Entrez votre nom :', 's');¬
+    \subsection{Sorties}
+    ¬fprintf(formatSpec, A1, .., An)¬
+    ¬fprintf('La valeur est: %g',nombre);¬
+    \subsection{Format d'affichage pour fprintf }
+    \begin{tabular}{@{}ll@{}}
+        Valeur numérique & \%g \\
+        Valeur textuelle & \%s \\
+        Précision décimale & \%.4g
+    \end{tabular}
+    \subsection{Caractère spéciaux pour fprintf}
+    \begin{tabular}{@{}ll@{}}
+        Saut de ligne & ¬\n¬ \\
+        Tabulation & ¬\t¬ \\
+        Apostrophe & ¬''¬ \\
+        Pourcentage & ¬%%¬ \\
+        Backslash & ¬\\¬
+    \end{tabular}
+    
+    \section{Opérateurs}
+    \begin{tabular}{@{}ll@{}}
+    arithmétiques: & + - * / \^{}  mod(a,b)\\
+    relationnels: & < <= == >= > \char`~=\\
+    logiques: & \&\& || \char`~
+    \end{tabular}
+    
+    \section{Conditionnelles}
+    \begin{lstlisting}[mathescape]
+    if §\mlplaceholder{condition}§
+        §\mlplaceholder{instructions}§
+    elseif §\mlplaceholder{condition}§ $\tikzmark{list-falc-in}$
+        §\mlplaceholder{instructions}§
+    else
+        §\mlplaceholder{instructions}§ $\tikzmark{list-falc-out}$
+    end
+    %Exemple
+    if x > 0
+        fprintf('Positif')
+    elseif x < 0
+        fprintf('Négatif')
+    else
+        fprintf('Zéro')
+    end
+    \end{lstlisting}
+    \AddNote{list-falc-in}{list-falc-out}{list-falc-in}{facultatif}
+    
+    
+    \section{Boucles}
+    \subsection{while}
+    Quand on ne connait pas le nombre d'itérations
+    \begin{lstlisting}
+    while §\mlplaceholder{condition}§ 
+        §\mlplaceholder{instructions}§
+    end
+    %Exemple
+    i = 1;
+    while x < 5
+        fprintf('%g\n', i)
+        i = i + 1;
+    end
+    \end{lstlisting}
+    \subsection{for}
+    Quand on connait le nombre d'itérations
+    \begin{lstlisting}
+    for i = a:@step:@b
+        §\mlplaceholder{instructions}§
+    end
+    %Exemple
+    for i = 1:10:100
+        fprintf('%g', i)
+    end
+    \end{lstlisting}
+    
+    \section{Fonctions}
+    \subsection{Définitions}
+    \begin{lstlisting}
+    function @[out1, out2] =@ nom(@in1, in2@)
+        §\mlplaceholder{instructions}§
+        out1 = §\mlplaceholder{expression}§
+        out2 = §\mlplaceholder{expression}§
+    end
+    \end{lstlisting}
+    
+    \section{Validation}
+    \subsection{Fonctions is* valide...}
+    \begin{tabular}{@{}ll@{}}
+    ¬isempty(X)¬ & Variable vide \\
+    ¬isvector(X)¬ & Tableau 1D \\
+    ¬ismatrix(X)¬ & Tableau 2D \\
+    ¬isequal(a,b)¬ & Données égales \\
+    ¬islogical(X)¬ & Valeur booléenne \\
+    ¬isnumeric(X)¬ & Valeur numérique \\
+    ¬isinf(X)¬ & Valeur infinie \\
+    ¬isnan(X)¬ & Valeur impossible \\
+    ¬ischar(X)¬ & Chaine de caractères \\
+    ¬isstruct(X)¬ & Enregistrement \\
+    ¬isa(X,classStr)¬ & Un objet d'une classe\\
+    ¬isprime(X)¬ & Nombre premier
+    \end{tabular}
+    \subsection{Fonctions}
+    \begin{tabular}{@{}ll@{}}
+    ¬nargin¬ & Nombre de paramètres reçus\\
+    ¬nargout¬ & Nombre de paramètre de sorties\\
+    ¬error(msgStr)¬ & Génère une erreur \\
+    ¬assert(cond)¬ & Génère une erreur si condition fausse
+    \end{tabular}
+    
+    \section{Tableau}
+    \subsection{Fonctions de création}
+    \begin{tabular}{@{}ll@{}}
+    ¬[1, 2, 3]¬ & Vecteur manuel\\
+    ¬[1, 2; 3, 4]¬ & Matrice manuelle\\
+    ¬1:4¬ & Série numérique\\
+    ¬zeros(n,m))¬ & n x m de zéros\\
+    ¬ones(n,m))¬ & n x m de uns\\
+    ¬rand(n,m)¬ & n x m aléatoire [0,1]\\
+    ¬randi(imax,n,m)¬ & n x m aléatoire entre 1 et imax\\
+    eye(n,m) & n x m matrice identité\\
+    diag(v) & Matrice avec v diagonale
+    \end{tabular}
+    \subsection{Accès}
+    \begin{tabular}{@{}ll@{}}
+    ¬vec(i)¬ & Accès au vecteur à l'indice i\\
+    ¬mat(i,j)¬ & Accès à la matrice à la ligne i et colonne j
+    \end{tabular}
+    \subsection{Fonctions}
+    \begin{tabular}{@{}ll@{}}
+    ¬numel(A)¬ & Nombre d'éléments du tableau\\
+    ¬size(A,1)¬ & Nombre de ligne du tableau\\
+    ¬size(A,2)¬ & Nombre de colonne du tableau\\
+    ¬max(A)¬ & Maximum \\
+    ¬min(A)¬ & Minimum\\
+    ¬sum(A)¬ & Somme\\
+    ¬mean(A)¬ & Moyenne\\
+    ¬sort(A)¬ & Tri
+    \end{tabular}
+    \subsection{Fonctions sur les chaines de caractères}
+    \begin{tabular}{@{}ll@{}}
+    ¬strfind(str,pattern)¬ & Trouves les indices du pattern\\
+    ¬replace(str,old,new)¬ & Remplace dans un chaine\\
+    ¬[tok,rem] = strtok(str)¬ & Coupe la chaine aux espaces\\
+    ¬strcmp(s1,s2)¬ & Compare deux chaines\\
+    ¬strcmpi(s1,s2)¬ & Compare chaines, ignore casse\\
+    ¬upper(str)¬ & Change la chaine en haut de casse\\
+    ¬lower(str)¬ & Change la chaine en bas de casse\\
+    ¬str2num(str)¬ & Converti la chaine en nombre\\
+    ¬num2str(num)¬ & Converti un nombre en chaine
+    \end{tabular}
+    
+    \section{Fichiers}
+    \subsection{Fonctions générale}
+    \begin{tabular}{@{}ll@{}}
+    ¬fileID = fopen(filename)¬ & Ouvre en lecture\\
+    ¬fileID = fopen(filename,'w')¬ & Ouvre en écriture\\
+    ¬fclose(fileID)¬ & Ferme le fichier\\
+    ¬fclose('all')¬ & Ferme tous les fichiers\\
+    ¬feof(fileID)¬ & Détecte la fin du fichier
+    \end{tabular}
+    \subsection{Fichier texte}
+    \begin{tabular}{@{}ll@{}}
+    ¬ligne = fgetl(fileID)¬ & Lire une ligne \\
+    ¬ligne = fgets(fileID)¬ & Lire ligne avec ¬\n¬ inclus \\
+    ¬A = fscanf(fid,formatSpec)¬ & Lire données formattées\\
+    ¬fprintf(fileID,formatSpec,A1)¬ & Écrire dans fichier
+    \end{tabular}
+    \subsection{Fichier Binaire}
+    \begin{tabular}{@{}ll@{}}
+    ¬A = fread(fileID,sizeA,type)¬ & Lire dans fichier\\
+    ¬fwrite(fileID,A,type)¬ & Écrire dans fichier
+    \end{tabular}
+    
+    Type possible :
+    \begin{tabular}{@{}ll@{}}
+    ¬'int32'¬ & Nombre entiers\\
+    ¬'double'¬ & Valeurs numérique\\
+    ¬'char'¬ & Chaine de caractères
+    \end{tabular}
+    
+    
+    %\begin{minipage}{\linewidth}
+    \section{Classe}
+    \subsection{Définition}
+    \begin{lstlisting}
+    classdef NomClasse < handle
+        properties
+            Property1
+        end
+        properties (SetAccess = private)
+            Property2
+        end
+        methods
+            function obj = NomClasse(inputArg1,inputArg2)
+                obj.Property1 = inputArg1 + inputArg2;
+            end
+            function outputArg = method1(obj,inputArg)
+                outputArg = obj.Property1 + inputArg;
+            end
+            function method2(obj,inputArg)
+                obj.Property2 = obj.Property1 + inputArg;
+            end
+        end
+    end
+    \end{lstlisting}
+    
+    \subsection{Utilisation d'objets}
+    \begin{lstlisting}
+    %Création d'objet
+    obj = NomClasse(1,2);
+    %Accès aux propriétés publiques
+    obj.Property1 = 3;
+    %Appel des méthodes
+    x = obj.method1(4)
+    obj.method2(6)
+    \end{lstlisting}
+    
+    %\end{minipage}
+    
+    
+    \end{multicols*}
+    \end{document}
+    
+    
+    
+    
