@@ -170,7 +170,6 @@ La structure de contrôle conditionnel if\sidenote{\href{https://www.mathworks.c
 
 Il existe plusieurs variations du if. Commençons avec ça forme la plus simple.
 
-SIMPLE IF LEFT SIDE STRUCTURE RIGHT SIDE EXAMPLE
 \begin{fullwidth}
     \begin{minipage}{.45\linewidth}
     \begin{lstlisting}[title={Structure du if simple}]
@@ -191,10 +190,9 @@ end
 Dans ce cas simple, la condition, une expression booléenne, est évaluée. Si la condition est vrai, le bloc d'instruction entre le if et le end est exécuté. Sinon, dans le cas où l'expression est fausse, le bloc est ignoré et l'exécution continue après le end.
 \sidenote[][-1cm]{Une expression booléenne ou expression logique est une expression qui est évaluée à une valeur logique (true ou false).}
 Le deuxième cas ajoute un bloc d'instruction pour une condition fausse.
-
 \begin{fullwidth}
     \begin{minipage}{.45\linewidth}
-    \begin{lstlisting}[title={Structure du if simple}]
+    \begin{lstlisting}[title={Structure du if avec else}]
 if ¬\mlplaceholder{condition}¬
     ¬\mlplaceholder{instructions}¬
 else
@@ -203,7 +201,7 @@ end
     \end{lstlisting}
     \end{minipage}\hfill
     \begin{minipage}{.45\linewidth}
-    \begin{lstlisting}[title={Exemple du if simple}]
+    \begin{lstlisting}[title={Exemple du if avec else}]
 if x > 5
     fprintf('x plus grand que 5.')
 else
@@ -212,16 +210,31 @@ end
     \end{lstlisting}
     \end{minipage}
 \end{fullwidth}
-
 Avec cette configuration, si la condition est vraie, on exécute le premier bloc d'instruction. Si la condition est fausse, on exécute le bloc entre le else et le end. Dans les deux cas, après avoir exécuté le bloc, on continue l'exécution après le end.
-
 Le troisième cas permet d'avoir des conditions supplémentaires si la première n'est pas vraie.
-
-IF ELSEIF
-
-\sidenote{Les différentes conditions sont évaluées de manières séquentielles. Pour aller voir la deuxième condition, il faut que la première condition soit fausse.}
+\begin{fullwidth}
+    \begin{minipage}{.45\linewidth}
+    \begin{lstlisting}[title={Structure du if avec elseif}]
+if ¬\mlplaceholder{condition}¬
+    ¬\mlplaceholder{instructions}¬
+elseif ¬\mlplaceholder{condition}¬
+    ¬\mlplaceholder{instructions}¬
+end
+    \end{lstlisting}
+    \end{minipage}\hfill
+    \begin{minipage}{.45\linewidth}
+    \begin{lstlisting}[title={Exemple du if avec elseif}]
+if x > 5
+    fprintf('x plus grand que 5.')
+elseif x == 3
+    fprintf('x est égale à 3.')
+end
+    \end{lstlisting}
+    \end{minipage}
+\end{fullwidth}
 Le principe initial reste pareil, si la première condition est vraie, on exécute le premier bloc d'instruction. Sinon, on regarde la deuxième condition et on exécute son bloc d'instructions si la condition est vrai.
-Les blocs d'instructions sont mutuellement exclusifs, dès qu'un des blocs est exécuté, le programme saute au end et continu à partir de là.
+Les blocs d'instructions sont mutuellement exclusifs, dès qu'un des blocs est exécuté\sidenote{Les différentes conditions sont évaluées de manières séquentielles. Pour aller voir la deuxième condition, il faut que la première condition soit fausse.}
+, le programme saute au end et continu à partir de là.
 
 On peut aussi mélanger les deux configurations, la seule restriction est que le else doit obligatoirement être le dernier bloc d'instructions. Ce dernier sera exécuté seulement si aucune des conditions n'est vraie.
 \sidenote{On peut aussi imbriquer les structures de contrôles au besoin. On peut donc avoir des if dans des if.}
@@ -229,9 +242,31 @@ On peut aussi mélanger les deux configurations, la seule restriction est que le
 \subsection{Conditionnel switch}
 La conditionnel switch\sidenote{\href{https://www.mathworks.com/help/matlab/ref/switch.html}{switch, case, otherwise}} est un cas particulier du if avec une syntaxe qui permet de faciliter son implémentation et sa lisibilité.
 Le switch est utilisé quand une variable doit être comparée à une série d'égalité possible. On switch sur la variable et implémente plusieurs cas possibles.
-
-IF ET SWITCH
-
+\begin{fullwidth}
+    \begin{minipage}{.45\linewidth}
+    \begin{lstlisting}[title={Structure d'un if pouvant être un switch}]
+if x == 3
+    ¬\mlplaceholder{instructions}¬
+elseif x == 7
+    ¬\mlplaceholder{instructions}¬
+else
+    ¬\mlplaceholder{instructions}¬
+end
+    \end{lstlisting}
+    \end{minipage}\hfill
+    \begin{minipage}{.45\linewidth}
+    \begin{lstlisting}[title={Structure du switch}]
+switch x
+    case 3
+        ¬\mlplaceholder{instructions}¬
+    case 7
+        ¬\mlplaceholder{instructions}¬
+    otherwise
+        ¬\mlplaceholder{instructions}¬
+end
+    \end{lstlisting}
+    \end{minipage}
+\end{fullwidth}
 Les principes des blocs d'instructions du if sont aussi applicables au switch. Les blocs sont mutuellement exclusifs et il existe un bloc pour le cas où toutes les possibilités ont échoué.
 \sidenote{Le switch peut être remplacé par un if dans tous les cas, mais il est préférable de l'utiliser lorsque possible.}
 Le switch peut être utilisé pour la comparaison de valeurs numériques ou de chaines de caractères.
@@ -239,22 +274,3 @@ Le switch peut être utilisé pour la comparaison de valeurs numériques ou de c
 \nobibliography{cours1}
 \bibliographystyle{plainnat}
 \end{document}
-
-% \begin{fullwidth}
-%     \begin{minipage}{.45\linewidth}
-%     \begin{lstlisting}[title={Test caption}]
-%     %Un script très cool
-%     clc
-%     clear
-%     max('allo')
-%     \end{lstlisting}
-%     \end{minipage}\hfill
-%     \begin{minipage}{.45\linewidth}
-%     \begin{lstlisting}[title={Test caption}]
-%     %Un script très cool mais avec du texte encore plus long que l'autre
-%     clc
-%     clear
-%     max('allo')
-%     \end{lstlisting}
-%     \end{minipage}
-% \end{fullwidth}
