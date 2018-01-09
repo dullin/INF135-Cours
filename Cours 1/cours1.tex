@@ -123,11 +123,11 @@ fprintf('Bonjour la vie!\n')
 \end{lstlisting}
 Pour afficher le contenu d'une variable avec fprintf, il nous faut inclure un opérateur de formatage à l'intérieur de notre chaine de caractère. Il faut ensuite inclure la valeur à afficher comme expression dans la fonction.
 \begin{lstlisting}[title={fprintf avec opérateur de formatage}]
-fprintf('Nombre : \%g', 3)
+fprintf('Nombre : %g', 3)
 fprintf('Mot : %s', 'allo')
 
 x = 5;
-fprintf('Nombre : \%g', x)
+fprintf('Nombre : %g', x)
 \end{lstlisting}
 L'opérateur de formatage utilisé dépend de la valeur à afficher. Les deux cas généraux sont \%g pour des valeurs numériques et \%s pour des chaines de caractères. Il nous est aussi possible d'afficher un nombre limité de valeurs fractionnaires avec \%.Xf ou X est le nombre de décimales à afficher.
 La fonction fprintf nous donne aussi la possibilité d'afficher des caractères spéciaux qui ne sont pas représentés par des caractères normaux ou des caractères réservés. Voici les exemples les plus communs.
