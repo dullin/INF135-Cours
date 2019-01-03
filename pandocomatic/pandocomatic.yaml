@@ -1,0 +1,25 @@
+settings:
+  match-files: all
+templates:
+  presentation:
+    pandoc:
+      from: markdown
+      to: beamer
+      listings: true
+      include-in-header: lstheader.tex
+      pdf-engine: xelatex
+      standalone: true
+      rename: pres.sh
+    metadata:
+      theme: 'metropolis'
+      aspectratio: 169
+  presentation-handout:
+    pandoc:
+      from: markdown
+      to: pdf
+      pdf-engine: xelatex
+      listings: true
+      include-in-header: lstheader.tex
+      rename: pres_handout.sh
+    metadata:
+      geometry: margin=1in
