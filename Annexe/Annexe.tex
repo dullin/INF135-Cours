@@ -1,4 +1,4 @@
-\documentclass[10pt,landscape]{article}
+\documentclass[12pt,landscape]{article}
     \usepackage{multicol}
     %\usepackage{calc}
     \usepackage{ifthen}
@@ -164,11 +164,11 @@
     \subsection{Sorties}
     ¬fprintf(formatSpec, A1, .., An)¬
     ¬fprintf('La valeur est: %g',nombre);¬
-    \subsection{Format d'affichage pour fprintf }
+    \subsection{Format d'affichage pour fprintf et fscanf }
     \begin{tabular}{@{}ll@{}}
         Valeur numérique & \%g \\
         Valeur textuelle & \%s \\
-        Précision décimale & \%.4g
+        Précision décimale & \%.4f
     \end{tabular}
     \subsection{Caractère spéciaux pour fprintf}
     \begin{tabular}{@{}ll@{}}
@@ -216,7 +216,7 @@
     end
     %Exemple
     i = 1;
-    while x < 5
+    while i < 5
         fprintf('%g\n', i)
         i = i + 1;
     end
@@ -232,17 +232,31 @@
         fprintf('%g', i)
     end
     \end{lstlisting}
+    \begin{minipage}{1.0\textwidth}
     
-    \section{Fonctions}
-    \subsection{Définitions}
-    \begin{lstlisting}
-    function @[out1, out2] =@ nom(@in1, in2@)
-        §\mlplaceholder{instructions}§
-        out1 = §\mlplaceholder{expression}§
-        out2 = §\mlplaceholder{expression}§
-    end
-    \end{lstlisting}
-    
+        \section{Fonctions}
+        \subsection{Définitions}
+        \begin{lstlisting}[xleftmargin=\dimexpr-\leftmarginii-\leftmargini]
+            function @[out1, out2] =@ nom(@in1, in2@)
+            §\mlplaceholder{instructions}§
+            out1 = §\mlplaceholder{expression}§
+            out2 = §\mlplaceholder{expression}§
+            end
+        \end{lstlisting}
+    \end{minipage}
+        
+        \subsection{Fonctions utiles}
+    \begin{tabular}{@{}ll@{}}
+    ¬clc¬ & Vide la fenêtre de commande \\
+    ¬clear¬ & Vide la mémoire \\
+    ¬fix(X)¬ & Coupe la partie fractionnaire \\
+    ¬mod(X,M)¬ & Restant d'une division \\
+    ¬sqrt(X)¬ & Racine carré \\
+    ¬abs(X)¬ & Valeur absolue \\
+    ¬round(X)¬ & Arrondie \\
+    ¬randi(X)¬ & Nomre aléatoire entre 1 et X
+    \end{tabular}
+
     \section{Validation}
     \subsection{Fonctions is* valide...}
     \begin{tabular}{@{}ll@{}}
@@ -257,7 +271,8 @@
     ¬ischar(X)¬ & Chaine de caractères \\
     ¬isstruct(X)¬ & Enregistrement \\
     ¬isa(X,classStr)¬ & Un objet d'une classe\\
-    ¬isprime(X)¬ & Nombre premier
+    ¬isprime(X)¬ & Nombre premier\\
+    ¬isfield(S,field)¬ & Nom d'un champ dans une struct\\
     \end{tabular}
     \subsection{Fonctions}
     \begin{tabular}{@{}ll@{}}
@@ -347,7 +362,7 @@
         properties
             Property1
         end
-        properties (SetAccess = private)
+        properties (SetAccess=private)
             Property2
         end
         methods
@@ -363,7 +378,7 @@
         end
     end
     \end{lstlisting}
-    
+    \begin{minipage}{1.0\textwidth}
     \subsection{Utilisation d'objets}
     \begin{lstlisting}
     %Création d'objet
@@ -374,7 +389,7 @@
     x = obj.method1(4)
     obj.method2(6)
     \end{lstlisting}
-    
+\end{minipage}
     %\end{minipage}
     
     
