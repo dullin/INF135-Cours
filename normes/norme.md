@@ -98,18 +98,22 @@ Le nommage inclut la création d'identificateurs pour toutes variables, fonction
 
 ## Utiliser des noms significatifs
 Toute création d'identificateur doit avoir un nom significatif.
+
 - Utilisez des mots complets.
 - L'utilisation d'abréviations est acceptée seulement si l'abréviation est de connaissance générale.
 
 **Exception**: Si le programme a besoin d'utiliser des coordonnées géométriques ou des variables d'expressions mathématiques (par exemple x, y, z), il est acceptable de nommer seulement ces variables ainsi.
 
 ## Bonnes pratiques
-Voici des bonnes pratiques pour le nommage de variables
+Voici des bonnes pratiques pour le nommage de variables:
+
 - Éviter des noms presque identiques
 - Éviter les noms ambigus ou vagues
 - Préfixe `n` pour le nombre d'éléments
 - Préfixe  `this` pour représenter l'élément courant
 - Préfixe `i` pour un itérateur d'éléments
+- Préfixe `vec` pour un vecteur
+- Préfixe `mat` pour une matrice
 
 ### camelCase pour les noms de variables
 Dans les noms de variables utilisant plusieurs mots, ceux-ci sont reliés en camelCase : la première lettre de chaque nouveau mot est en majuscules et la première lettre reste en minuscule.
@@ -117,19 +121,41 @@ Dans les noms de variables utilisant plusieurs mots, ceux-ci sont reliés en cam
 premierPoint = 5;
 nomDeVariableTresLong = 10;
 ```
+
+### camelCase pour le nom des dossiers
+Les noms de dossiers dans un programme suivent les même règles que les noms de variables.
+
+![Noms des dossiers](dossier.png){width=100px}
+
 ### Faire attention à i et j
 Les variables i et j sont habituellement utilisées pour des compteurs de boucles.
 
 **Exception**: Si le programme a besoin d'utiliser des nombres imaginaires (représenté par i et j dans MATLAB), n'utilisez pas les noms `i` et `j` pour des variables.
 
 ## Constantes
-Toute donnée statique, donc qui ne change pas entre les utilisations du programme, devrait être représentée par une constante. Puisque MATLAB ne contient pas de syntaxe spécifique pour les constantes, nous utiliserons des variables avec des pratiques précises pour indiquer l'utilisation de constantes. Une exception est possible pour les données statiques dont la définition est implicite. Par exemple, de diviser par 2 pour trouver la moitié ou par 100 pour obtenir un pourcentage.
+Toute donnée statique, donc qui ne change pas entre les utilisations du programme, devrait être représentée par une constante. Puisque MATLAB ne contient pas de syntaxe spécifique pour les constantes, nous utiliserons des variables ou des fonctions avec des pratiques précises pour indiquer l'utilisation de constantes. Une exception est possible pour les données statiques dont la définition est implicite. Par exemple, de diviser par 2 pour trouver la moitié ou par 100 pour obtenir un pourcentage.
 
-### Constante en majuscules avec _
-Les noms des constantes sont en majuscules et les mots sont séparés par un tiret-bas "_".
+### Constante en majuscules avec `_`
+Les noms des constantes sont en majuscules et les mots sont séparés par un tiret-bas "`_`".
 ```MATLAB
 MA_CONSTANTE = 5;
 NOMBRE_MAX_ELEVES = 35;
+```
+
+### Constante utilisé une seule fois
+Si un constante est seulement utilisé une fois, soit dans un script ou une fonction. Elle est déclaré en tant que "variable" constante au début du fichier.
+```MATLAB
+% Début du script.
+NOMBRE_MAX_ELEVES = 35; 
+% Autres instructions.
+```
+
+# Constante utilisé plus d'une fois
+Les constantes qui sont réutilisées à l'intérieur d'un même programme doivent être déployées en tant que fonction de constante. Un fonction qui porte le nom de la constante, ne reçoit aucun paramètre et retourne la valeur de la constante. Il est possible de regroupé plusieurs constantes dans le même dossier de constantes pour facilité leur administration.
+```MATLAB
+function [const] = NOMBRE_MAX_ELEVES
+const = 55;
+end
 ```
 
 ### Utilisez un fichier de constantes pour plusieurs constantes pour usages multiples
@@ -188,11 +214,13 @@ function [aire] = aireTriangle(base, hauteur)
 %
 ```
 
+Cette forme est basé sur les [docstrings de type Google](https://github.com/google/styleguide/blob/gh-pages/pyguide.md#38-comments-and-docstrings).
+
 ## Chaque action est accompagnée d'un commentaire
 Avec chaque actions du programmes, des commentaires sont ajoutés pour indiquer les actions prises par le programme. Une actions peut être une série d'instruction qui porte vers le même but.
 
-## Les commentaires à l'impératif présent
-Pour diminuer la charge du texte dans nos programmes, les commentaires se feront à l'impératif présent.
+## Les commentaires à l'indicatif présent
+Pour diminuer la charge du texte dans nos programmes, les commentaires se feront à l'indicatif présent de la troisième personne du singulier en omettant la personne. 
 
 # Programmation
 Certaines règles de style s'appliquent dans les instructions. Habituellement, une dérogation à ses règles est indiquée par un avertissement (en jaune) de MATLAB.
