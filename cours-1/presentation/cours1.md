@@ -2,6 +2,7 @@
 title: INF135 - Introduction à la programmation en génie mécanique
 author: Hugo Leblanc
 date: Cours 1
+mainfont: heuristica
 pandocomatic_:
   use-template: 
   - presentation
@@ -51,8 +52,8 @@ pandocomatic_:
 # Fonctions de base et caractères spéciaux de MATLAB
 * `clc` - Vide la fenêtre de commande (Command Window);
 * `clear` - Vide l'espace de travail (Workspace);
-* `help` _nomFonction_ - Donne de l'aide sur la fonction donné;
-* `doc` _nomFonction_ - Donne la documentation sur la fonction donné.
+* `help` _nomFonction_ - Donne de l'aide sur la fonction donnée;
+* `doc` _nomFonction_ - Donne la documentation sur la fonction donnée.
 
 * Le caractère `;` est utilisé pour faire l'exécution d'une instruction silencieusement;
 * Les points de suspension `...` permettent de faire un saut de ligne dans le milieu d'une instruction.
@@ -62,7 +63,7 @@ pandocomatic_:
 * Le reste de la ligne après le `%` ne sera pas considéré par MATLAB durant l'exécution du code;
 * Une ligne vide sera aussi sautée par MATLAB;
 * Les commentaires sont primordiaux à la programmation;
-* Les commentaires sont utilisés en en-tête de fichiers, fonctions et programmée ainsi qu’à l’intérieur d’un programme pour aider à comprendre l’intention des instructions.
+* Les commentaires sont utilisés en en-tête de fichiers, fonctions et programme ainsi qu’à l’intérieur d’un programme pour aider à comprendre l’intention des instructions.
 
 # Scripts
 * Un script est un amalgame d'instructions qui seront exécutées ensemble;

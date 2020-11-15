@@ -7,9 +7,22 @@ pandocomatic_:
   - presentation
   - presentation-handout
 ...
+# Objectifs de la semaine
+* Fonctions
+    * Fonction minimale
+    * Paramètres d'entrés
+    * Retour
+    * Multiple retours
+* Fonctions vs scripts
+    * Portées des fonctions
+    * Durées de vies des variables
+    * Passage par valeurs
+    * Variables globales
+* Tests
 
 # Fonctions
 * Les fonctions sont des séries d'instructions contenues dans un ensemble pouvant être facilement re-utilisé. Par convention, la fonction doit faire une tâche simple et précise;
+* Contrairement aux scripts, les fonctions n'auront pas de saisit avec `input` et pas d'affichage avec `fprintf`. Cela à moins d'être expressément demandé.
 * Les fonctions peuvents demandés des paramètres (ou arguments) d'entrées. Ce sont des informations préalables aux calculs de la fonction;
 * Les fonctions peuvent émettrent des réponses que l'on appel retour.
 
@@ -23,10 +36,10 @@ end
 * Une fonction est dans un fichier de fonctions qui porte le même nom que le nom de la fonction;
 * La fonction peut ensuite être appellé par son nom de d'autre programme.
 
-# Paramètres d'entrées
-* Une fonction peut demander des paramètres d'entrées;
+# Paramètres d'entrés
+* Une fonction peut demander des paramètres d'entrés;
 * Ceux-ci seront dans un liste après le nom de la fonctions entre parenthèses délimités par une virgule;
-* Le paramètres d'entrées seront fournies par l'appelant de la fonction et peuvent donc être utilisé à l'intérieur des instruction de la fonctions sans être assigné préalablement.
+* Le paramètres d'entrés seront fournies par l'appelant de la fonction et peuvent donc être utilisé à l'intérieur des instruction de la fonctions sans être assigné préalablement.
 
 ~~~MATLAB
 function fcnAvecIn(var1, var2)
@@ -77,27 +90,31 @@ function [retour1] = nomFonction(arg1, arg2)
 %   >> nomFonction(4,6)
 %       ans = 
 %       34
+%
 
 instructions
 end
 ~~~
 
-# Portée des fonctions
-* Une fonction qui est la première dans son document `.m` est considérée à portée globale. Tous programmes et scripts pourront l’utiliser.
-* Une fonction qui n'est pas la première dans son document `.m` est considérée à portée locale. Seul les sous-programmes dans le même fichier pourront l’utiliser.
+# Exercice 2
+Écrivez une fonction qui trouve l’aire et le périmètre d’un triangle à partir de sa base et sa hauteur.
 
-# Durée de vies des variables
+# Fonctions locales
+* Une fonction qui est la première dans son document `.m` est considérée à portée globale. Tous programmes et scripts pourront l’utiliser.
+* Une fonction qui n'est pas la première dans son document `.m` est considérée à portée locale. Seul les sous-programmes dans le même fichier pourront l’utiliser. Cela inclut les scripts.
+
+# Contexte et durée de vies des variables
 * Tout ce qui se passe à l'intérieur des fonctions est détruit après l'appel de la fonction;
 * Toutes déclaration de variables à l'intérieur d'une fonction est détruite après l'appel de la fonction;
 * Seule la valeur de retour est renvoyée.
 
 # Passage par valeurs
-* Les paramètres et les retours sont renommé pour la durée de la fonction;
-* Seul leur valeurs seront transféré entre la fonction et l'appelant;
+* Les paramètres et les retours sont renommé pour la durée de la fonction. Les noms des paramètres de la fonction se nomme paramètres formels;
+* Seul leur valeurs seront transféré entre la fonction et l'appelant. On utilise le terme paramètres effectifs;
 * Les noms des paramètres et des retours n'ont aucune incidence;
 * L'ordre des paramètre et des retours est ce qui sera considéré.
 
-# Exercice 2
+# Exercice 3
 * Quel est le résultat de l'affichage du script `passageParValeurTest.m`
 
 ~~~MATLAB
@@ -138,7 +155,7 @@ assert(mod(23, 1) == 0)
 assert(mod(4, 12) == 4)
 ~~~
 
-# Exercice 3
+# Exercice 4
 * Écrivez des scripts de tests pour les fonctions de calcul d'aire et de détection de nombre impaire.
 
 # Tests de valeurs fractionnaires

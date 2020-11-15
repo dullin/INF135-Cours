@@ -119,7 +119,10 @@
     moredelim=**[is][{\btHL[facultatif]}]{@}{@},
     escapechar={§},
     aboveskip=-0.5ex,
-    belowskip=-1ex}
+    belowskip=-1ex,
+    xleftmargin=-.25in,
+    commentstyle=\color{black},
+    stringstyle=\color{black}}
     
     
     % -----------------------------------------------------------------------
@@ -162,7 +165,7 @@
     ¬x = input('Entrez un nombre : ');¬
     ¬str = input('Entrez votre nom :', 's');¬
     \subsection{Sorties}
-    ¬fprintf(formatSpec, A1, .., An)¬
+    ¬fprintf(fmt, A1, .., An)¬
     ¬fprintf('La valeur est: %g',nombre);¬
     \subsection{Format d'affichage pour fprintf et fscanf }
     \begin{tabular}{@{}ll@{}}
@@ -281,7 +284,24 @@
     ¬error(msgStr)¬ & Génère une erreur \\
     ¬assert(cond)¬ & Génère une erreur si condition fausse
     \end{tabular}
-    
+    \subsection{validateattributes}
+    ¬validateattributes(A, {type}, {attributes})¬
+    \subsubsection{type}
+    \begin{tabular}{@{}ll@{}}
+    ¬'numeric'¬ & Type numérique (double)\\
+    ¬'logical'¬ & Type logique (logical)\\
+    ¬'char'¬ & Type textuelle (char)\\
+    \end{tabular}
+    \subsubsection{attributes}
+    \begin{tabular}{@{}ll@{}}
+    ¬'vector'¬ & Taille d'une vecteur \\
+    ¬'scalar'¬ & Valeur unique 1x1\\
+    ¬'2d'¬ / ¬'3d'¬  & Taille 2D ou 3D\\
+    ¬'scalartext'¬ & Vecteur de caractères\\
+    ¬'>' , N¬ & Valeur plus grande que N\\
+    ¬'positive'¬ & Valeurs positives
+    \end{tabular}
+
     \section{Tableau}
     \subsection{Fonctions de création}
     \begin{tabular}{@{}ll@{}}
@@ -335,10 +355,10 @@
     \end{tabular}
     \subsection{Fichier texte}
     \begin{tabular}{@{}ll@{}}
-    ¬ligne = fgetl(fileID)¬ & Lire une ligne \\
-    ¬ligne = fgets(fileID)¬ & Lire ligne avec ¬\n¬ inclus \\
-    ¬A = fscanf(fid,formatSpec)¬ & Lire données formattées\\
-    ¬fprintf(fileID,formatSpec,A1)¬ & Écrire dans fichier
+    ¬ligne = fgetl(fileID)¬ & Lire une ligne de texte\\
+    ¬ligne = fgets(fileID)¬ & fgetl avec ¬\n¬ inclus \\
+    ¬A = fscanf(fid,fmt)¬ & Lire données formattées\\
+    ¬fprintf(fileID,fmt,A1)¬ & Écrire dans fichier
     \end{tabular}
     \subsection{Fichier Binaire}
     \begin{tabular}{@{}ll@{}}
@@ -360,38 +380,57 @@
     \begin{lstlisting}
     classdef NomClasse < handle
         properties
-            Property1
+            p1
         end
         properties (SetAccess=private)
-            Property2
+            p2
+        end
+        properties (Dependant)
+            p3
         end
         methods
-            function obj = NomClasse(inputArg1,inputArg2)
-                obj.Property1 = inputArg1 + inputArg2;
+            function [obj] = NomClasse(in1,in2)
+                obj.p1 = in1 + in2;
             end
-            function outputArg = method1(obj,inputArg)
-                outputArg = obj.Property1 + inputArg;
+            function [prop3] = get.p3(obj)
+                prop3 = obj.p1 + obj.p2;
             end
-            function method2(obj,inputArg)
-                obj.Property2 = obj.Property1 + inputArg;
+            function [out] = method1(obj,inArg)
+                out = obj.p1 + inArg;
+            end
+            function method2(obj,inArg)
+                obj.p2 = obj.p1 + inArg;
             end
         end
     end
     \end{lstlisting}
-    \begin{minipage}{1.0\textwidth}
+    \vspace{0.2in}
+%   \begin{minipage}{1.0\textwidth}
     \subsection{Utilisation d'objets}
     \begin{lstlisting}
     %Création d'objet
     obj = NomClasse(1,2);
     %Accès aux propriétés publiques
-    obj.Property1 = 3;
+    obj.p1 = 3;
     %Appel des méthodes
     x = obj.method1(4)
     obj.method2(6)
     \end{lstlisting}
-\end{minipage}
+%\end{minipage}
     %\end{minipage}
-    
+    \subsection{Attributs de propriétés}
+    \begin{lstlisting}
+    % Lecture Seule
+    SetAccess = private
+    % Écriture Seule
+    GetAccess = private
+    % Accès privées
+    Access = private
+    % Constante
+    Constant = true
+    % Dépendante
+    Dependent
+    \end{lstlisting}
     
     \end{multicols*}
     \end{document}
